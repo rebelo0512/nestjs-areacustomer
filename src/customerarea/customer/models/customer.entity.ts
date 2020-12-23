@@ -4,7 +4,7 @@ import { Base } from "@models/base.entity";
 
 @Entity("customers")
 export default class Customer extends Base {
-  @Column({ type: "int", nullable: false, unique: true })
+  @Column({ type: "int", nullable: true, unique: true })
   code: number;
 
   @Column({ type: "varchar", length: 300, nullable: false })

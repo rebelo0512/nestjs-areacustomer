@@ -18,6 +18,18 @@ export class NotificationReadRepository
     `);
   }
 
+  public async countNotificationDontReadByCustomerId(
+    id_customer: string,
+  ): Promise<number> {
+    const notifications_count = await getConnection().query(`
+      SELECT COUNT(id)
+      FROM notifications_read
+      WHERE customer_id = '${id_customer}' AND read = false
+    `);
+
+    return notifications_count[0].count;
+  }
+
   public async create({
     customer_id,
     notification_id,

@@ -8,3 +8,8 @@ export interface INotificationFindByCustomerIdDTO {
   neigh_objective: string;
   read: boolean;
 }
+
+export interface INotificationFindByCustomerIdReturnDTO {
+  read: INotificationFindByCustomerIdDTO[];
+  unread: INotificationFindByCustomerIdDTO[];
+}

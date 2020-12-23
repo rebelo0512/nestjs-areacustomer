@@ -28,6 +28,7 @@
     "@nestjs/typeorm": "^7.1.5",
     "@types/uuid": "^8.3.0",
     "axios": "^0.21.0",
+    "cors": "^2.8.5",
     "date-fns": "^2.16.1",
     "dotenv": "^8.2.0",
     "jsonwebtoken": "^8.5.1",

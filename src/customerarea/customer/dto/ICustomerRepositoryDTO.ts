@@ -7,4 +7,5 @@ export interface ICustomerRepositoryDTO {
   findByCode(code: number): Promise<Customer>;
   findByCityAndNeigh(data: ICustomerFindByCityAndNeighDTO): Promise<Customer[]>;
   create(data: ICustomerCreateDTO): Promise<Customer>;
+  updateFirstAccess(code: number): Promise<boolean>;
 }

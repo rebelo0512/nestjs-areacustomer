@@ -8,9 +8,10 @@ import { NotificationRepository } from "./repositories/notification.repository";
 import { NotificationReadRepository } from "./repositories/notification_read.repository";
 import { NotificationController } from "./routes/notification.controller";
 import { NotificationReadController } from "./routes/notification_read.controller";
-import { NotificationCreate } from "./services/notificationCreate.service";
-import { NotificationFindByCustomerId } from "./services/notificationFindByCustomerId.service";
-import { NotificationReadUpdateRead } from "./services/notificationReadUpdateRead.service";
+import { NotificationCreate } from "./services/notification/notificationCreate.service";
+import { NotificationFindByCustomerId } from "./services/notification/notificationFindByCustomerId.service";
+import { NotificationReadCountNotificationDontReadByCustomerId } from "./services/notification_read/notificationReadCountNotificationDontReadByCustomerId.service";
+import { NotificationReadUpdateRead } from "./services/notification_read/notificationReadUpdateRead.service";
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { NotificationReadUpdateRead } from "./services/notificationReadUpdateRea
     NotificationFindByCustomerId,
     NotificationCreate,
     NotificationReadUpdateRead,
+    NotificationReadCountNotificationDontReadByCustomerId,
   ],
 })
 export class NotificationModule {}

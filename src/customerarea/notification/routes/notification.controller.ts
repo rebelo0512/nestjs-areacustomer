@@ -1,9 +1,9 @@
 import { CustomerTokenValidationGuard } from "@customerarea/customer/guards/CustomerTokenValidation.guard";
 import { Body, Controller, Get, Param, Post, UseGuards } from "@nestjs/common";
 
-import { INotificationFindByCustomerIdDTO } from "../dto/INotificationFindByCustomerIdDTO";
-import { NotificationCreate } from "../services/notificationCreate.service";
-import { NotificationFindByCustomerId } from "../services/notificationFindByCustomerId.service";
+import { INotificationFindByCustomerIdReturnDTO } from "../dto/INotificationFindByCustomerIdDTO";
+import { NotificationCreate } from "../services/notification/notificationCreate.service";
+import { NotificationFindByCustomerId } from "../services/notification/notificationFindByCustomerId.service";
 import { CustomerTokenAndIdValidationGuard } from "@customerarea/customer/guards/CustomerTokenAndIdValidation.guard";
 import { NotificationCreateValidationGuard } from "../guards/notificationCreateValidation.guard";
 
@@ -19,7 +19,7 @@ export class NotificationController {
   @UseGuards(CustomerTokenAndIdValidationGuard)
   public async findByCustomerId(
     @Param("id_customer") id_customer: string,
-  ): Promise<INotificationFindByCustomerIdDTO[]> {
+  ): Promise<INotificationFindByCustomerIdReturnDTO> {
     return await this.NotificationFindByCustomerId.exec(id_customer);
   }
 

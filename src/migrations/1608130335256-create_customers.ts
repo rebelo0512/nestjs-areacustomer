@@ -41,7 +41,7 @@ export class createCustomers1608130335256 implements MigrationInterface {
           {
             name: "first_access",
             type: "boolean",
-            default: false,
+            default: true,
           },
           {
             name: "city",

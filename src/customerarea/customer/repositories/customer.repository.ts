@@ -58,4 +58,17 @@ export class CustomerRepository implements ICustomerRepositoryDTO {
 
     return customer;
   }
+
+  public async updateFirstAccess(code: number): Promise<boolean> {
+    await getConnection()
+      .createQueryBuilder()
+      .update(Customer)
+      .set({
+        first_access: false,
+      })
+      .where("code = :code", { code })
+      .execute();
+
+    return true;
+  }
 }

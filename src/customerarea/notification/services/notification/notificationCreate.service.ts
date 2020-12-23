@@ -1,8 +1,8 @@
 import { CustomerRepository } from "@customerarea/customer/repositories/customer.repository";
 import { Injectable } from "@nestjs/common";
-import { INotificationCreateDTO } from "../dto/INotificationCreateDTO";
-import { NotificationRepository } from "../repositories/notification.repository";
-import { NotificationReadRepository } from "../repositories/notification_read.repository";
+import { INotificationCreateDTO } from "../../dto/INotificationCreateDTO";
+import { NotificationRepository } from "../../repositories/notification.repository";
+import { NotificationReadRepository } from "../../repositories/notification_read.repository";
 
 @Injectable()
 export class NotificationCreate {

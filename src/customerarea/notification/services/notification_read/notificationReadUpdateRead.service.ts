@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
 
-import { INotificationReadUpdateReadDTO } from "../dto/INotificationReadUpdateReadDTO";
-import { NotificationReadRepository } from "../repositories/notification_read.repository";
+import { INotificationReadUpdateReadDTO } from "../../dto/INotificationReadUpdateReadDTO";
+import { NotificationReadRepository } from "../../repositories/notification_read.repository";
 
 @Injectable()
 export class NotificationReadUpdateRead {
