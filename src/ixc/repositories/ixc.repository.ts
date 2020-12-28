@@ -88,6 +88,29 @@ export class IxcRepository implements IIxcRepositoryDTO {
     return contratos;
   }
 
+  public async findCustomerByDocument(
+    document: string,
+  ): Promise<IIxcFindCustomerByIdDTO> {
+    const form = "cliente";
+    const params = {
+      qtype: `${form}.cnpj_cpf`,
+      query: document,
+      oper: "=",
+      page: "1",
+      rp: "1",
+      sortname: "cliente.id",
+      sortorder: "asc",
+    };
+    let customer = await this.api.select({ form, params });
+
+    if (customer.data.total === "0")
+      throw new HttpException("No customer found", HttpStatus.FORBIDDEN);
+
+    customer = await customer.data.registros[0];
+
+    return customer;
+  }
+
   public async findCityById(id_city: number | string): Promise<string> {
     const form = "cidade";
     const params = {

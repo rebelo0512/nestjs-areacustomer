@@ -6,7 +6,7 @@ import { IIxcFindBilletByContractIdDTO } from "@ixc/dto/IIxcFindBilletByContract
 import {
   ICustomerFinancialInfoDTO,
   ICustomerFinancialInfoReturnDTO,
-} from "../dto/ICustomerGetFinancialInfoDTO";
+} from "../../dto/ICustomerGetFinancialInfoDTO";
 
 @Injectable()
 export class CustomerGetFinancialInfo {

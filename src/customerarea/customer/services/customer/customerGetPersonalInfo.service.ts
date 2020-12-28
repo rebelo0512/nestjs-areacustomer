@@ -2,7 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { format, parseISO } from "date-fns";
 
 import { IxcRepository } from "@ixc/repositories/ixc.repository";
-import { ICustomerGetPersonalInfoDTO } from "../dto/ICustomerGetPersonalInfoDTO";
+import { ICustomerGetPersonalInfoDTO } from "../../dto/ICustomerGetPersonalInfoDTO";
 
 @Injectable()
 export class CustomerGetPersonalInfo {

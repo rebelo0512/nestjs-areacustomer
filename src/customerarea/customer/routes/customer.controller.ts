@@ -13,11 +13,11 @@ import { ICustomerGetPersonalInfoDTO } from "../dto/ICustomerGetPersonalInfoDTO"
 
 import { CustomerCodeValidationGuard } from "../guards/CustomerCodeValidation.guard";
 import { CustomerTokenValidationGuard } from "../guards/CustomerTokenValidation.guard";
-import { CustomerAuth } from "../services/customerAuth.service";
-import { CustomerChangePassword } from "../services/customerChangePassword.service";
-import { CustomerGetFinancialInfo } from "../services/customerGetFinancialInfo.service";
-import { CustomerGetPersonalInfo } from "../services/customerGetPersonalInfo.service";
-import { CustomerSendBilletEmail } from "../services/customerSendBilletEmail.service";
+import { CustomerAuth } from "../services/customer/customerAuth.service";
+import { CustomerChangePassword } from "../services/customer/customerChangePassword.service";
+import { CustomerGetFinancialInfo } from "../services/customer/customerGetFinancialInfo.service";
+import { CustomerGetPersonalInfo } from "../services/customer/customerGetPersonalInfo.service";
+import { CustomerSendBilletEmail } from "../services/customer/customerSendBilletEmail.service";
 
 @Controller("customers")
 export class CustomerController {

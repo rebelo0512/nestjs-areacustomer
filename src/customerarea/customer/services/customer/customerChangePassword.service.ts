@@ -1,8 +1,8 @@
 import { Injectable } from "@nestjs/common";
 
 import { IxcRepository } from "@ixc/repositories/ixc.repository";
-import { ICustomerChangePasswordDTO } from "../dto/ICustomerChangePasswordDTO";
-import { CustomerRepository } from "../repositories/customer.repository";
+import { ICustomerChangePasswordDTO } from "../../dto/ICustomerChangePasswordDTO";
+import { CustomerRepository } from "../../repositories/customer.repository";
 
 @Injectable()
 export class CustomerChangePassword {

@@ -16,11 +16,19 @@ export class CustomerRepository implements ICustomerRepositoryDTO {
     `);
   }
 
-  public async findByCode(code: number): Promise<Customer> {
+  public async findByCode(code: number): Promise<Customer[]> {
     return await getConnection().query(`
       SELECT *
       FROM customers
       WHERE code = '${code}'
+    `);
+  }
+
+  public async findByDocument(document: string): Promise<Customer[]> {
+    return await getConnection().query(`
+      SELECT *
+      FROM customers
+      WHERE document = '${document}'
     `);
   }
 

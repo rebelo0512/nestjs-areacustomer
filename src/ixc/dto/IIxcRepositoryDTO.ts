@@ -9,6 +9,7 @@ export interface IIxcRepositoryDTO {
   findCustomerByHotsiteEmail(
     email: string,
   ): Promise<IIxcFindCustomerByHotsiteEmailDTO>;
+  findCustomerByDocument(document: string): Promise<IIxcFindCustomerByIdDTO>;
   findContractByCustomerId(
     code: number,
   ): Promise<IIxcFindContractByCustomerIdDTO[]>;

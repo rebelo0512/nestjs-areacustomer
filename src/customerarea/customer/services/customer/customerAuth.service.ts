@@ -3,12 +3,12 @@ import { sign } from "jsonwebtoken";
 import { config } from "dotenv";
 
 import { IxcRepository } from "@ixc/repositories/ixc.repository";
-import { CustomerRepository } from "../repositories/customer.repository";
+import { CustomerRepository } from "../../repositories/customer.repository";
 import {
   ICustomerAuthDTO,
   ICustomerAuthReturnDTO,
-} from "../dto/ICustomerAuthDTO";
-import { AbbreviateNames } from "../utils/AbbreviateNames";
+} from "../../dto/ICustomerAuthDTO";
+import { AbbreviateNames } from "../../utils/AbbreviateNames";
 
 config();
 
