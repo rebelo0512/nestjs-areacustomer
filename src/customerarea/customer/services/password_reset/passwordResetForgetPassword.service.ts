@@ -23,14 +23,14 @@ export class PasswordResetForgetPassword {
   public async exec({
     document,
   }: IPasswordResetForgetPasswordDTO): Promise<IPasswordResetForgetPasswordReturnDTO> {
+    document = await this.TransformDocument.numberToDocument(document);
+
     const customer = await this.CustomerRepository.findByDocument(document);
 
     if (!customer)
       throw new HttpException("No customer found", HttpStatus.FORBIDDEN);
 
     const customer_id = customer[0].id;
-
-    document = await this.TransformDocument.numberToDocument(document);
 
     const ixc_customer = await this.IxcRepository.findCustomerByDocument(
       document,
