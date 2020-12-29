@@ -16,7 +16,7 @@ export class CustomerGetPersonalInfo {
     const date_birth =
       client.data_nascimento !== "0000-00-00"
         ? format(parseISO(client.data_nascimento), "d/M/yyyy")
-        : "Null";
+        : "0000-00-00";
 
     const city = await this.IxcRepository.findCityById(client.cidade);
 
@@ -34,7 +34,7 @@ export class CustomerGetPersonalInfo {
 
     return {
       // Info Cliente
-      name: client.nome,
+      name: client.razao,
       date_birth,
       email: client.email,
       nickname: "",

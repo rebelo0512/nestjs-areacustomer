@@ -27,7 +27,7 @@ export class PasswordResetForgetPassword {
 
     const customer = await this.CustomerRepository.findByDocument(document);
 
-    if (!customer)
+    if (customer.length === 0)
       throw new HttpException("No customer found", HttpStatus.FORBIDDEN);
 
     const customer_id = customer[0].id;
@@ -40,9 +40,8 @@ export class PasswordResetForgetPassword {
       customer_id,
     );
 
-    if (pass_reset_exists) {
+    if (pass_reset_exists.length === 0)
       await this.PasswordResetRepository.del(customer_id);
-    }
 
     const passwd = await this.PasswordResetRepository.create(customer_id);
 
