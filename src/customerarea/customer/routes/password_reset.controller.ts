@@ -1,7 +1,9 @@
 import { Body, Controller, Param, Post, Put, UseGuards } from "@nestjs/common";
+
 import { IPasswordResetChangePasswordReturnDTO } from "../dto/IPasswordResetChangePasswordDTO";
 import { IPasswordResetForgetPasswordReturnDTO } from "../dto/IPasswordResetForgetPasswordDTO";
 import { PasswordResetChangePasswordValidationGuard } from "../guards/PasswordResetChangePasswordValidation.guard";
+import { PasswordResetForgetPasswordValidationGuard } from "../guards/PasswordResetForgetPasswordValidation.guard";
 import { PasswordResetChangePassword } from "../services/password_reset/passwordResetChangePassword.service";
 import { PasswordResetForgetPassword } from "../services/password_reset/passwordResetForgetPassword.service";
 
@@ -13,6 +15,7 @@ export class PasswordResetController {
   ) {}
 
   @Post("") // Path: /password_reset
+  @UseGuards(PasswordResetForgetPasswordValidationGuard)
   public async forgetPassword(
     @Body("document") document: string,
   ): Promise<IPasswordResetForgetPasswordReturnDTO> {

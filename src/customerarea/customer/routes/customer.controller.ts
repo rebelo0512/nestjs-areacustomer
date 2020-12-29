@@ -14,6 +14,7 @@ import { IMailSendPreRegistrationDTO } from "src/mail/dto/IMailSendPreRegistrati
 import { ICustomerAuthReturnDTO } from "../dto/ICustomerAuthDTO";
 import { ICustomerFinancialInfoReturnDTO } from "../dto/ICustomerGetFinancialInfoDTO";
 import { ICustomerGetPersonalInfoDTO } from "../dto/ICustomerGetPersonalInfoDTO";
+import { CustomerAuthValidationGuard } from "../guards/CustomerAuthValidation.guard";
 import { CustomerCodeValidationGuard } from "../guards/CustomerCodeValidation.guard";
 import { CustomerTokenValidationGuard } from "../guards/CustomerTokenValidation.guard";
 import { CustomerAuth } from "../services/customer/customerAuth.service";
@@ -35,6 +36,7 @@ export class CustomerController {
   ) {}
 
   @Post("login") // Path: /customers/login
+  @UseGuards(CustomerAuthValidationGuard)
   public async auth(
     @Body("username") username: string,
     @Body("password") password: string,
