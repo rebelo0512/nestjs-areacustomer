@@ -5,18 +5,22 @@ import {
   Param,
   Post,
   Put,
+  Req,
   UseGuards,
 } from "@nestjs/common";
+import { Request } from "express";
+import { IMailSendPreRegistrationDTO } from "src/mail/dto/IMailSendPreRegistrationDTO";
+
 import { ICustomerAuthReturnDTO } from "../dto/ICustomerAuthDTO";
 import { ICustomerFinancialInfoReturnDTO } from "../dto/ICustomerGetFinancialInfoDTO";
 import { ICustomerGetPersonalInfoDTO } from "../dto/ICustomerGetPersonalInfoDTO";
-
 import { CustomerCodeValidationGuard } from "../guards/CustomerCodeValidation.guard";
 import { CustomerTokenValidationGuard } from "../guards/CustomerTokenValidation.guard";
 import { CustomerAuth } from "../services/customer/customerAuth.service";
 import { CustomerChangePassword } from "../services/customer/customerChangePassword.service";
 import { CustomerGetFinancialInfo } from "../services/customer/customerGetFinancialInfo.service";
 import { CustomerGetPersonalInfo } from "../services/customer/customerGetPersonalInfo.service";
+import { CustomerPreRegistration } from "../services/customer/customerPreRegistration.service";
 import { CustomerSendBilletEmail } from "../services/customer/customerSendBilletEmail.service";
 
 @Controller("customers")
@@ -27,6 +31,7 @@ export class CustomerController {
     private CustomerChangePassword: CustomerChangePassword,
     private CustomerGetFinancialInfo: CustomerGetFinancialInfo,
     private CustomerSendBilletEmail: CustomerSendBilletEmail,
+    private CustomerPreRegistration: CustomerPreRegistration,
   ) {}
 
   @Post("login") // Path: /customers/login
@@ -82,5 +87,12 @@ export class CustomerController {
     @Param("code_billet") code_billet: number,
   ): Promise<boolean> {
     return await this.CustomerSendBilletEmail.exec(code_billet);
+  }
+
+  @Post("/pre_registration")
+  public async preRegistration(@Req() req: Request): Promise<void> {
+    const data: IMailSendPreRegistrationDTO = req.body;
+
+    return await this.CustomerPreRegistration.exec(data);
   }
 }

@@ -3,6 +3,7 @@ import { createTransport } from "nodemailer";
 
 import { IMailRepositoryDTO } from "../dto/IMailRepositoryDTO";
 import { IMailSendPasswordResetDTO } from "../dto/IMailSendPasswordResetDTO";
+import { IMailSendPreRegistrationDTO } from "../dto/IMailSendPreRegistrationDTO";
 
 const { MAIL_HOST, MAIL_PORT, MAIL_USER, MAIL_PASSWORD } = process.env;
 
@@ -42,6 +43,50 @@ export class MailRepository implements IMailRepositoryDTO {
     <p>URL: https://neocliente.neorede.com.br/password_reset/${id_pass_reset}</p>
     <p>O link para redefinição de senha é válido por 24 horas.</p>
     <p>Caso você não tenha feito essa solicitação, ignore este e-mail.</p>
+    <p>Agradecemos o contato.</p>
+    `,
+    });
+
+    return true;
+  }
+
+  public async sendPreRegistration(
+    data: IMailSendPreRegistrationDTO,
+  ): Promise<boolean> {
+    await this.transporter.sendMail({
+      from: data.from,
+      to: data.to,
+      subject: data.subject,
+      html: `
+    <p>Segue pedido de pré cadastro:</p>
+    <b>--|-- Dados Pessoais --|--</b>
+    <p> - Nome: ${data.name}</p>
+    <p> - Documento - CPF: ${data.cpf}</p>
+    <p> - Documento - RG: ${data.rg}</p>
+    <p> - Data Aniversario: ${data.dateofbirth}</p>
+    <b>--|-- Contato --|--</b>
+    <p> - Email: ${data.email}</p>
+    <p> - Celular: ${data.cellphone}</p>
+    <p> - Telefone: ${data.phone}</p>
+    <p> - Celular Opcional: ${data.optionalcellphone}</p>
+    <p> - Telefone Opcional: ${data.optionalphone}</p>
+    <b>--|-- Endereço --|--</b>
+    <p> - Moradia: ${data.type}</p>
+    <p> - Referencia: ${data.type === "Casa" ? data.reference : ""}</p>
+    <p> - CEP: ${data.cep}</p>
+    <p> - Cidade: ${data.city}</p>
+    <p> - Bairro: ${data.neigh}</p>
+    <p> - Endereço: ${data.address}</p>
+    <p> - Nome do Condominio: ${
+      data.type === "Apartamento" ? data.nameofcondominium : ""
+    }</p>
+    <b>--|-- Plano --|--</b>
+    <p> - Plano: ${data.plan}</p>
+    <b>--|-- Vencimento e Instalação --|--</b>
+    <p> - Periodo de Instalação: ${data.period}</p>
+    <p> - Melhor Dia de Vencimento: ${data.dueDate}</p>
+    <p> - Observação: ${data.obs}</p>
+    <p> - Por Onde Nos Conheceu: ${data.youknowus}</p>
     <p>Agradecemos o contato.</p>
     `,
     });

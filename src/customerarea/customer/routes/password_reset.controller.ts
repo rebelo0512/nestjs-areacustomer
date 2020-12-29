@@ -14,10 +14,9 @@ export class PasswordResetController {
 
   @Post("") // Path: /password_reset
   public async forgetPassword(
-    @Body("code") code: number,
     @Body("document") document: string,
   ): Promise<IPasswordResetForgetPasswordReturnDTO> {
-    return await this.PasswordResetForgetPassword.exec({ code, document });
+    return await this.PasswordResetForgetPassword.exec({ document });
   }
 
   @Put(":document/:id_password_forget") // Path: /password_reset/:document/:id_password_forget

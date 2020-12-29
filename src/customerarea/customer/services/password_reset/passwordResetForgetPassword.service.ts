@@ -21,10 +21,9 @@ export class PasswordResetForgetPassword {
   ) {}
 
   public async exec({
-    code,
     document,
   }: IPasswordResetForgetPasswordDTO): Promise<IPasswordResetForgetPasswordReturnDTO> {
-    const customer = await this.CustomerRepository.findByCode(code);
+    const customer = await this.CustomerRepository.findByDocument(document);
 
     if (!customer)
       throw new HttpException("No customer found", HttpStatus.FORBIDDEN);
@@ -54,6 +53,10 @@ export class PasswordResetForgetPassword {
       id_pass_reset: passwd.id,
     });
 
-    return { status: "success", message: "Email enviado com sucesso" };
+    return {
+      status: "success",
+      message: "Email enviado com sucesso",
+      email: ixc_customer.email,
+    };
   }
 }
