@@ -7,6 +7,7 @@ import { IIxcFindCustomerByHotsiteEmailDTO } from "@ixc/dto/IIxcFindCustomerByHo
 import { IIxcFindContractByCustomerIdDTO } from "@ixc/dto/IIxcFindContractByCustomerIdDTO";
 import { IIxcFindBilletByContractIdDTO } from "@ixc/dto/IIxcFindBilletByContractIdDTO";
 import { IIxcChangePasswordHotsiteDTO } from "@ixc/dto/IIxcChangePasswordHotsiteDTO";
+import { IIxcCreateLeadDTO } from "@ixc/dto/IIxcCreateLeadDTO";
 
 @Injectable()
 export class IxcRepository implements IIxcRepositoryDTO {
@@ -163,6 +164,54 @@ export class IxcRepository implements IIxcRepositoryDTO {
     };
 
     await this.api.select({ form, params });
+
+    return true;
+  }
+
+  public async createLead({
+    nome,
+    razao,
+    cnpj_cpf,
+    data_nascimento,
+    email_atendimento,
+    fone_residencial,
+    fone_comercial,
+    fone_celular,
+    fone_whatsapp,
+    email,
+    cep,
+    endereco,
+    numero,
+    bairro,
+    complemento,
+    cidade,
+    referencia,
+    obs,
+  }: IIxcCreateLeadDTO): Promise<boolean> {
+    const form = "contato";
+    const params = {
+      nome,
+      razao,
+      cnpj_cpf,
+      data_cadastro: new Date(),
+      data_nascimento,
+      email_atendimento,
+      fone_residencial,
+      fone_comercial,
+      fone_celular,
+      fone_whatsapp,
+      email,
+      cep,
+      endereco,
+      numero,
+      bairro,
+      complemento,
+      cidade,
+      referencia,
+      obs,
+    };
+
+    const teste = await this.api.create({ form, params });
 
     return true;
   }

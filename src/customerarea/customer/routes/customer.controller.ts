@@ -9,11 +9,14 @@ import {
   UseGuards,
 } from "@nestjs/common";
 import { Request } from "express";
-import { IMailSendPreRegistrationDTO } from "src/mail/dto/IMailSendPreRegistrationDTO";
 
 import { ICustomerAuthReturnDTO } from "../dto/ICustomerAuthDTO";
 import { ICustomerFinancialInfoReturnDTO } from "../dto/ICustomerGetFinancialInfoDTO";
 import { ICustomerGetPersonalInfoDTO } from "../dto/ICustomerGetPersonalInfoDTO";
+import {
+  ICustomerPreRegistrationDTO,
+  ICustomerPreRegistrationReturnDTO,
+} from "../dto/ICustomerPreRegistrationDTO";
 import { CustomerAuthValidationGuard } from "../guards/CustomerAuthValidation.guard";
 import { CustomerCodeValidationGuard } from "../guards/CustomerCodeValidation.guard";
 import { CustomerTokenValidationGuard } from "../guards/CustomerTokenValidation.guard";
@@ -92,8 +95,10 @@ export class CustomerController {
   }
 
   @Post("/pre_registration")
-  public async preRegistration(@Req() req: Request): Promise<void> {
-    const data: IMailSendPreRegistrationDTO = req.body;
+  public async preRegistration(
+    @Req() req: Request,
+  ): Promise<ICustomerPreRegistrationReturnDTO> {
+    const data: ICustomerPreRegistrationDTO = req.body;
 
     return await this.CustomerPreRegistration.exec(data);
   }

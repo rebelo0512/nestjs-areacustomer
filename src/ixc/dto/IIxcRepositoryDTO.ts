@@ -1,4 +1,5 @@
 import { IIxcChangePasswordHotsiteDTO } from "./IIxcChangePasswordHotsiteDTO";
+import { IIxcCreateLeadDTO } from "./IIxcCreateLeadDTO";
 import { IIxcFindBilletByContractIdDTO } from "./IIxcFindBilletByContractIdDTO";
 import { IIxcFindContractByCustomerIdDTO } from "./IIxcFindContractByCustomerIdDTO";
 import { IIxcFindCustomerByHotsiteEmailDTO } from "./IIxcFindCustomerByHotsiteEmailDTO";
@@ -18,5 +19,6 @@ export interface IIxcRepositoryDTO {
     id_contract: number,
   ): Promise<IIxcFindBilletByContractIdDTO[]>;
   sendBilletMail(id_billet: number): Promise<boolean>;
+  createLead(data: IIxcCreateLeadDTO): Promise<boolean>;
   changePasswordHotsite(data: IIxcChangePasswordHotsiteDTO): Promise<boolean>;
 }

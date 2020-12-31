@@ -27,6 +27,19 @@ export class IXCAPI {
     });
   }
 
+  public async create({ form, params }: ICreateDTO): Promise<any> {
+    const path = `webservice/v1/${form}`;
+
+    return await axios(`${this.url}/${path}`, {
+      method: "POST",
+      data: JSON.stringify(params),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: this.auth(),
+      },
+    });
+  }
+
   public async update({ form, params, id }: IUpdateDTO): Promise<any> {
     const path = `webservice/v1/${form}/${id}`;
 
@@ -67,6 +80,31 @@ interface IParamsGetBilletDTO {
 interface ISelectDTO {
   form: string;
   params: IParamsSelectDTO | IParamsGetBilletDTO;
+}
+
+interface ICreateDTO {
+  form: string;
+  params: {
+    nome: string;
+    razao: string;
+    cnpj_cpf: string;
+    data_nascimento: string;
+    email_atendimento: string;
+    data_cadastro: Date;
+    fone_residencial: string;
+    fone_comercial: string;
+    fone_celular: string;
+    fone_whatsapp: string;
+    email: string;
+    cep: string;
+    endereco: string;
+    numero: string;
+    bairro: string;
+    complemento: string;
+    cidade: string;
+    referencia: string;
+    obs: string;
+  };
 }
 
 interface IUpdateDTO {

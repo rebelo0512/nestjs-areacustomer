@@ -16,8 +16,14 @@ export interface ICustomerPreRegistrationDTO {
   cep: string;
   neigh: string;
   address: string;
+  number: string;
   youknowus: string;
   nameofcondominium?: string;
   reference?: string;
   obs?: string;
+}
+
+export interface ICustomerPreRegistrationReturnDTO {
+  status: string;
+  message: string;
 }

@@ -1,16 +1,42 @@
 import { Injectable } from "@nestjs/common";
 
-import { MailRepository } from "src/mail/repositories/mail.repository";
-import { IMailSendPreRegistrationDTO } from "src/mail/dto/IMailSendPreRegistrationDTO";
+import { IxcRepository } from "@ixc/repositories/ixc.repository";
+import {
+  ICustomerPreRegistrationDTO,
+  ICustomerPreRegistrationReturnDTO,
+} from "./../../dto/ICustomerPreRegistrationDTO";
 
 @Injectable()
 export class CustomerPreRegistration {
-  constructor(private MailRepository: MailRepository) {}
+  constructor(private IxcRepository: IxcRepository) {}
 
-  public async exec(data: IMailSendPreRegistrationDTO): Promise<void> {
-    data.from = "neocliente@neorede.com.br";
-    data.to = "neocliente@neorede.com.br";
-    data.subject = "Pré-Cadastro";
-    await this.MailRepository.sendPreRegistration(data);
+  public async exec(
+    data: ICustomerPreRegistrationDTO,
+  ): Promise<ICustomerPreRegistrationReturnDTO> {
+    await this.IxcRepository.createLead({
+      nome: data.name,
+      razao: data.name,
+      bairro: data.neigh,
+      cep: data.cep,
+      cidade: data.city,
+      cnpj_cpf: data.cpf,
+      complemento: data.reference,
+      data_nascimento: data.dateofbirth,
+      email: data.email,
+      email_atendimento: data.email,
+      endereco: data.address,
+      fone_celular: data.cellphone,
+      fone_comercial: data.optionalphone,
+      fone_residencial: data.phone,
+      fone_whatsapp: data.optionalcellphone,
+      numero: data.number,
+      obs: data.plan,
+      referencia: data.reference,
+    });
+
+    return {
+      status: "success",
+      message: "Pré-Cadastro cadastrado com sucesso",
+    };
   }
 }
