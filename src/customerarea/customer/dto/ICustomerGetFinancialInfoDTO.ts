@@ -7,4 +7,5 @@ export interface ICustomerFinancialInfoReturnDTO {
   bol_activies: string[];
   bol_pay: string[];
   bol_late: string[];
+  bol_detached: string[];
 }

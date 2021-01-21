@@ -94,11 +94,13 @@ export class CustomerController {
     return await this.CustomerSendBilletEmail.exec(code_billet);
   }
 
-  @Post("/pre_registration")
+  @Post("/pre_registration") // Path: /customers/pre_registration
   public async preRegistration(
     @Req() req: Request,
   ): Promise<ICustomerPreRegistrationReturnDTO> {
     const data: ICustomerPreRegistrationDTO = req.body;
+
+    console.log(data);
 
     return await this.CustomerPreRegistration.exec(data);
   }
