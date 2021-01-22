@@ -92,9 +92,9 @@ interface ICreateDTO {
     email_atendimento: string;
     data_cadastro: Date;
     fone_residencial: string;
-    fone_comercial: string;
+    fone_comercial?: string;
     fone_celular: string;
-    fone_whatsapp: string;
+    fone_whatsapp?: string;
     email: string;
     cep: string;
     endereco: string;

@@ -5,9 +5,7 @@ export interface IIxcCreateLeadDTO {
   data_nascimento: string;
   email_atendimento: string;
   fone_residencial: string;
-  fone_comercial: string;
   fone_celular: string;
-  fone_whatsapp: string;
   email: string;
   cep: string;
   endereco: string;

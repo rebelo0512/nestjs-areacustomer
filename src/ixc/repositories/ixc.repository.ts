@@ -175,9 +175,7 @@ export class IxcRepository implements IIxcRepositoryDTO {
     data_nascimento,
     email_atendimento,
     fone_residencial,
-    fone_comercial,
     fone_celular,
-    fone_whatsapp,
     email,
     cep,
     endereco,
@@ -197,9 +195,7 @@ export class IxcRepository implements IIxcRepositoryDTO {
       data_nascimento,
       email_atendimento,
       fone_residencial,
-      fone_comercial,
       fone_celular,
-      fone_whatsapp,
       email,
       cep,
       endereco,
@@ -211,7 +207,7 @@ export class IxcRepository implements IIxcRepositoryDTO {
       obs,
     };
 
-    const teste = await this.api.create({ form, params });
+    await this.api.create({ form, params });
 
     return true;
   }

@@ -100,8 +100,6 @@ export class CustomerController {
   ): Promise<ICustomerPreRegistrationReturnDTO> {
     const data: ICustomerPreRegistrationDTO = req.body;
 
-    console.log(data);
-
     return await this.CustomerPreRegistration.exec(data);
   }
 }

@@ -20,6 +20,7 @@ export interface ICustomerPreRegistrationDTO {
   youknowus: string;
   nameofcondominium?: string;
   reference?: string;
+  complement?: string;
   obs?: string;
 }
 
