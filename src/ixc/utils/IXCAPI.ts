@@ -102,6 +102,9 @@ interface ICreateDTO {
     bairro: string;
     complemento: string;
     cidade: string;
+    id_vd_contrato: number;
+    id_filial: number;
+    id_candidato_tipo: number;
     referencia: string;
     obs: string;
   };

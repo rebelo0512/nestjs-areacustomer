@@ -33,6 +33,7 @@ export class NotificationRepository implements INotificationRepositoryDTO {
           SELECT *
           FROM notifications
           WHERE id = '${r.notification_id}'
+          ORDER BY created_at DESC
         `);
 
         notification = notification[0];

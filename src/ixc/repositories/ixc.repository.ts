@@ -183,6 +183,9 @@ export class IxcRepository implements IIxcRepositoryDTO {
     bairro,
     complemento,
     cidade,
+    id_vd_contrato,
+    id_filial,
+    id_candidato_tipo,
     referencia,
     obs,
   }: IIxcCreateLeadDTO): Promise<boolean> {
@@ -203,6 +206,9 @@ export class IxcRepository implements IIxcRepositoryDTO {
       bairro,
       complemento,
       cidade,
+      id_vd_contrato,
+      id_filial,
+      id_candidato_tipo,
       referencia,
       obs,
     };

@@ -41,7 +41,7 @@ export class CustomerPreRegistration {
       // fone_whatsapp: data.optionalcellphone,
       numero: data.number,
       obs: `${home}
-        Plano: ${data.plan}
+        RG: ${data.rg}
         Periodo: ${data.period}
         Data De Vencimento: ${data.dueDate}
         Telefone Fixo Opcional: ${data.optionalphone}
@@ -49,6 +49,9 @@ export class CustomerPreRegistration {
         Onde Nos Conheceu: ${data.youknowus}
         Observacao: ${data.obs}`,
       referencia: data.type === "Casa" ? data.reference : "",
+      id_vd_contrato: parseInt(data.plan),
+      id_candidato_tipo: 19,
+      id_filial: 1,
     });
 
     return {

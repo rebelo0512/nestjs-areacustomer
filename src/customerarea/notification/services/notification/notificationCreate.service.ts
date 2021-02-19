@@ -32,7 +32,7 @@ export class NotificationCreate {
       neigh: neigh_objective,
     });
 
-    (async () => {
+    await (async () => {
       customers.map(async (customer) => {
         await this.NotificationReadRepository.create({
           customer_id: customer.id,
