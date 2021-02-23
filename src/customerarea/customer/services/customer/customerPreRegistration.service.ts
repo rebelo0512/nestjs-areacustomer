@@ -50,7 +50,7 @@ export class CustomerPreRegistration {
         Observacao: ${data.obs}`,
       referencia: data.type === "Casa" ? data.reference : "",
       id_vd_contrato: parseInt(data.plan),
-      id_candidato_tipo: 19,
+      id_candidato_tipo: 10,
       id_filial: 1,
     });
 
