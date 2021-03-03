@@ -27,7 +27,9 @@ export class CustomerGetPersonalInfo {
         contracts.push({
           id: contrato.id,
           plan: contrato.contrato,
-          ativacao: format(parseISO(contrato.data_ativacao), "d/M/yyyy"),
+          ativacao: contrato.data_ativacao
+            ? format(parseISO(contrato.data_ativacao), "d/M/yyyy")
+            : "",
         });
       }),
     );
