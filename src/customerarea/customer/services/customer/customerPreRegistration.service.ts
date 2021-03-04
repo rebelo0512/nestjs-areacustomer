@@ -21,11 +21,11 @@ export class CustomerPreRegistration {
         : "Moradia: Casa";
 
     await this.IxcRepository.createLead({
-      nome: data.name,
-      razao: data.name,
-      bairro: data.neigh,
+      nome: data.name.toUpperCase(),
+      razao: data.name.toUpperCase(),
+      bairro: data.neigh.toUpperCase(),
       cep: data.cep,
-      cidade: data.city,
+      cidade: data.city.toUpperCase(),
       cnpj_cpf: data.cpf,
       complemento: data.type === "Apartamento" ? data.complement : "",
       data_nascimento: `${date.substr(5, 2)}/${date.substr(8, 2)}/${date.substr(
@@ -34,7 +34,7 @@ export class CustomerPreRegistration {
       )}`,
       email: data.email,
       email_atendimento: data.email,
-      endereco: data.address,
+      endereco: data.address.toUpperCase(),
       fone_celular: data.cellphone,
       // fone_comercial: data.optionalphone,
       fone_residencial: data.phone,
@@ -47,7 +47,9 @@ export class CustomerPreRegistration {
         Telefone Fixo Opcional: ${data.optionalphone}
         Celular Opcional: ${data.optionalcellphone}
         Onde Nos Conheceu: ${data.youknowus}
-        Observacao: ${data.obs}`,
+        Observacao: ${data.obs}
+        id do plano de venda: ${data.plan}
+        `,
       referencia: data.type === "Casa" ? data.reference : "",
       id_vd_contrato: parseInt(data.plan),
       id_candidato_tipo: 10,
