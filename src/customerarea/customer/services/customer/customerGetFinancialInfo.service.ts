@@ -41,13 +41,13 @@ export class CustomerGetFinancialInfo {
             linha_digitavel: boleto.linha_digitavel,
           };
 
-          if (
+          if (boleto.status === "R") bol_pay.push(bol);
+          else if (
             boleto.id_contrato === "0" &&
             boleto.id_contrato_avulso === contract &&
             boleto.status !== "C"
           )
             bol_detached.push(bol);
-          else if (boleto.status === "R") bol_pay.push(bol);
           else if (boleto.status === "A") {
             if (isBefore(new Date(), parseISO(boleto.data_vencimento)))
               bol_activies.push(bol);
