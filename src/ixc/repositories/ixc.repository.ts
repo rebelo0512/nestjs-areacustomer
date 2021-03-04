@@ -246,7 +246,9 @@ export class IxcRepository implements IIxcRepositoryDTO {
       senha: password,
     };
 
-    if (customer.cnpj_cpf !== document)
+    const customer_document = customer.cnpj_cpf.replace(/[/.-]/g, "");
+
+    if (customer_document !== document)
       throw new HttpException("Don't have permission", HttpStatus.BAD_REQUEST);
 
     await this.api.update({ form, params, id: code });
