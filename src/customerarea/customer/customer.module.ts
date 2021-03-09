@@ -19,6 +19,7 @@ import { TransformDocument } from "./utils/TransformDocument";
 import { MailModule } from "src/mail/mail.module";
 import { PasswordResetChangePassword } from "./services/password_reset/passwordResetChangePassword.service";
 import { CustomerPreRegistration } from "./services/customer/customerPreRegistration.service";
+import { CustomerGetBilletArchive } from "./services/customer/customerGetBilletArchive.service";
 
 @Module({
   imports: [
@@ -37,6 +38,7 @@ import { CustomerPreRegistration } from "./services/customer/customerPreRegistra
     CustomerChangePassword,
     CustomerGetFinancialInfo,
     CustomerSendBilletEmail,
+    CustomerGetBilletArchive,
     CustomerPreRegistration,
     PasswordResetForgetPassword,
     PasswordResetChangePassword,

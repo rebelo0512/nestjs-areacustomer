@@ -22,6 +22,7 @@ import { CustomerCodeValidationGuard } from "../guards/CustomerCodeValidation.gu
 import { CustomerTokenValidationGuard } from "../guards/CustomerTokenValidation.guard";
 import { CustomerAuth } from "../services/customer/customerAuth.service";
 import { CustomerChangePassword } from "../services/customer/customerChangePassword.service";
+import { CustomerGetBilletArchive } from "../services/customer/customerGetBilletArchive.service";
 import { CustomerGetFinancialInfo } from "../services/customer/customerGetFinancialInfo.service";
 import { CustomerGetPersonalInfo } from "../services/customer/customerGetPersonalInfo.service";
 import { CustomerPreRegistration } from "../services/customer/customerPreRegistration.service";
@@ -36,6 +37,7 @@ export class CustomerController {
     private CustomerGetFinancialInfo: CustomerGetFinancialInfo,
     private CustomerSendBilletEmail: CustomerSendBilletEmail,
     private CustomerPreRegistration: CustomerPreRegistration,
+    private CustomerGetBilletArchive: CustomerGetBilletArchive,
   ) {}
 
   @Post("login") // Path: /customers/login
@@ -92,6 +94,20 @@ export class CustomerController {
     @Param("code_billet") code_billet: number,
   ): Promise<boolean> {
     return await this.CustomerSendBilletEmail.exec(code_billet);
+  }
+
+  @Get(":code/info/billet/:code_billet/archive") // Path: /customers/:code/info/billet/:code_billet/archive
+  @UseGuards(CustomerTokenValidationGuard, CustomerCodeValidationGuard)
+  public async billetArchive(
+    @Req() req: Request,
+    @Param("code_billet") code_billet: number,
+  ) {
+    const result = await this.CustomerGetBilletArchive.exec(code_billet);
+
+    return {
+      status: "success",
+      link: `${req.protocol}://${process.env.HOST}:${process.env.PORT}/${process.env.PUBLIC_URL_FILES}/${result}`,
+    };
   }
 
   @Post("/pre_registration") // Path: /customers/pre_registration

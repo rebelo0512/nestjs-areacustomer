@@ -19,6 +19,7 @@ export interface IIxcRepositoryDTO {
     id_contract: number,
   ): Promise<IIxcFindBilletByContractIdDTO[]>;
   sendBilletMail(id_billet: number): Promise<boolean>;
+  billetArchive(id_billet: number): Promise<string>;
   createLead(data: IIxcCreateLeadDTO): Promise<boolean>;
   changePasswordHotsite(data: IIxcChangePasswordHotsiteDTO): Promise<boolean>;
 }

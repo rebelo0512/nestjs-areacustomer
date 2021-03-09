@@ -168,6 +168,22 @@ export class IxcRepository implements IIxcRepositoryDTO {
     return true;
   }
 
+  public async billetArchive(id_billet: number): Promise<string> {
+    const form = "get_boleto";
+    const params = {
+      boletos: `${id_billet}`,
+      juro: "N",
+      multa: "N",
+      atualiza_boleto: "N",
+      tipo_boleto: "arquivo",
+      base64: "S",
+    };
+
+    const billet = await this.api.select({ form, params });
+
+    return billet;
+  }
+
   public async createLead({
     nome,
     razao,
