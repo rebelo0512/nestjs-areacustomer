@@ -130,6 +130,7 @@ interface IUpdateDTO {
     tipo_assinante: string;
     email: string;
     senha: string;
+    tipo_localidade: string;
   };
   id: string | number;
 }

@@ -260,6 +260,7 @@ export class IxcRepository implements IIxcRepositoryDTO {
       tipo_assinante: customer.tipo_assinante,
       email: customer.email,
       senha: password,
+      tipo_localidade: "U",
     };
 
     const customer_document = customer.cnpj_cpf.replace(/[/.-]/g, "");
@@ -267,7 +268,7 @@ export class IxcRepository implements IIxcRepositoryDTO {
     if (customer_document !== document)
       throw new HttpException("Don't have permission", HttpStatus.BAD_REQUEST);
 
-    await this.api.update({ form, params, id: code });
+    const teste = await this.api.update({ form, params, id: code });
 
     return true;
   }
