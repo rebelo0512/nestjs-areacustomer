@@ -21,20 +21,20 @@ export class CustomerPreRegistration {
         : "Moradia: Casa";
 
     await this.IxcRepository.createLead({
-      nome: data.name.toUpperCase(),
-      razao: data.name.toUpperCase(),
-      bairro: data.neigh.toUpperCase(),
+      nome: await this.utf8Encode(data.name.toUpperCase()),
+      razao: await this.utf8Encode(data.name.toUpperCase()),
+      bairro: await this.utf8Encode(data.neigh.toUpperCase()),
       cep: data.cep,
-      cidade: data.city.toUpperCase(),
+      cidade: await this.utf8Encode(data.city.toUpperCase()),
       cnpj_cpf: data.cpf,
       complemento: data.type === "Apartamento" ? data.complement : "",
       data_nascimento: `${date.substr(5, 2)}/${date.substr(8, 2)}/${date.substr(
         0,
         4,
       )}`,
-      email: data.email,
-      email_atendimento: data.email,
-      endereco: data.address.toUpperCase(),
+      email: await this.utf8Encode(data.email),
+      email_atendimento: await this.utf8Encode(data.email),
+      endereco: await this.utf8Encode(data.address.toUpperCase()),
       fone_celular: data.cellphone,
       // fone_comercial: data.optionalphone,
       fone_residencial: data.phone,
@@ -60,5 +60,22 @@ export class CustomerPreRegistration {
       status: "success",
       message: "Pré-Cadastro cadastrado com sucesso",
     };
+  }
+
+  private async utf8Encode(unicodeString: string): Promise<string> {
+    const utf8String = unicodeString
+      .replace(/[\u0080-\u07ff]/g, function (c: string) {
+        const cc = c.charCodeAt(0);
+        return String.fromCharCode(0xc0 | (cc >> 6), 0x80 | (cc & 0x3f));
+      })
+      .replace(/[\u0800-\uffff]/g, function (c: string) {
+        const cc = c.charCodeAt(0);
+        return String.fromCharCode(
+          0xe0 | (cc >> 12),
+          0x80 | ((cc >> 6) & 0x3f),
+          0x80 | (cc & 0x3f),
+        );
+      });
+    return utf8String;
   }
 }

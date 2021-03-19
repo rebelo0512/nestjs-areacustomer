@@ -229,7 +229,7 @@ export class IxcRepository implements IIxcRepositoryDTO {
       obs,
     };
 
-    await this.api.create({ form, params });
+    const teste = await this.api.create({ form, params });
 
     return true;
   }

@@ -34,8 +34,8 @@ export class IXCAPI {
       method: "POST",
       data: JSON.stringify(params),
       headers: {
-        "Content-Type": "application/json",
         Authorization: this.auth(),
+        "Content-type": "application/x-www-form-urlencoded;charset=utf-8",
       },
     });
   }
