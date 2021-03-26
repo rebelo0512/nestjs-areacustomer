@@ -18,6 +18,7 @@ export interface ICustomerPreRegistrationDTO {
   address: string;
   number: string;
   youknowus: string;
+  people: string;
   nameofcondominium?: string;
   reference?: string;
   complement?: string;

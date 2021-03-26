@@ -185,6 +185,7 @@ export class IxcRepository implements IIxcRepositoryDTO {
   }
 
   public async createLead({
+    tipo_pessoa,
     nome,
     razao,
     cnpj_cpf,
@@ -207,6 +208,7 @@ export class IxcRepository implements IIxcRepositoryDTO {
   }: IIxcCreateLeadDTO): Promise<boolean> {
     const form = "contato";
     const params = {
+      tipo_pessoa,
       nome,
       razao,
       cnpj_cpf,
@@ -229,7 +231,7 @@ export class IxcRepository implements IIxcRepositoryDTO {
       obs,
     };
 
-    const teste = await this.api.create({ form, params });
+    await this.api.create({ form, params });
 
     return true;
   }
@@ -268,7 +270,7 @@ export class IxcRepository implements IIxcRepositoryDTO {
     if (customer_document !== document)
       throw new HttpException("Don't have permission", HttpStatus.BAD_REQUEST);
 
-    const teste = await this.api.update({ form, params, id: code });
+    await this.api.update({ form, params, id: code });
 
     return true;
   }

@@ -21,6 +21,7 @@ export class CustomerPreRegistration {
         : "Moradia: Casa";
 
     await this.IxcRepository.createLead({
+      tipo_pessoa: data.people === "cpf" ? "F" : "J",
       nome: await this.utf8Encode(data.name.toUpperCase()),
       razao: await this.utf8Encode(data.name.toUpperCase()),
       bairro: await this.utf8Encode(data.neigh.toUpperCase()),
@@ -28,10 +29,9 @@ export class CustomerPreRegistration {
       cidade: await this.utf8Encode(data.city.toUpperCase()),
       cnpj_cpf: data.cpf,
       complemento: data.type === "Apartamento" ? data.complement : "",
-      data_nascimento: `${date.substr(5, 2)}/${date.substr(8, 2)}/${date.substr(
-        0,
-        4,
-      )}`,
+      data_nascimento: date
+        ? `${date.substr(5, 2)}/${date.substr(8, 2)}/${date.substr(0, 4)}`
+        : "",
       email: await this.utf8Encode(data.email),
       email_atendimento: await this.utf8Encode(data.email),
       endereco: await this.utf8Encode(data.address.toUpperCase()),
@@ -41,14 +41,15 @@ export class CustomerPreRegistration {
       // fone_whatsapp: data.optionalcellphone,
       numero: data.number,
       obs: `${home}
-        RG: ${data.rg}
+        RG ou CNPJ: ${data.people === "cpf" ? data.rg : data.cpf}
+        Data Nascimento: ${date}
         Periodo: ${data.period}
         Data De Vencimento: ${data.dueDate}
         Telefone Fixo Opcional: ${data.optionalphone}
         Celular Opcional: ${data.optionalcellphone}
         Onde Nos Conheceu: ${data.youknowus}
         Observacao: ${data.obs}
-        id do plano de venda: ${data.plan}
+        id ou nome do plano de venda: ${data.plan}
         `,
       referencia: data.type === "Casa" ? data.reference : "",
       id_vd_contrato: parseInt(data.plan),

@@ -85,6 +85,7 @@ interface ISelectDTO {
 interface ICreateDTO {
   form: string;
   params: {
+    tipo_pessoa: string;
     nome: string;
     razao: string;
     cnpj_cpf: string;

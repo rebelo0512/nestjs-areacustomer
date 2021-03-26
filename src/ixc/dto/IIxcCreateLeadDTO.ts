@@ -1,4 +1,5 @@
 export interface IIxcCreateLeadDTO {
+  tipo_pessoa: string;
   nome: string;
   razao: string;
   cnpj_cpf: string;
