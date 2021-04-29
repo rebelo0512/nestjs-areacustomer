@@ -20,4 +20,5 @@ export interface IIxcFindCustomerByIdDTO {
   iss_classificacao_padrao: string;
   contribuinte_icms: string;
   tipo_assinante: string;
+  ie_identidade: string;
 }

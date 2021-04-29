@@ -263,6 +263,7 @@ export class IxcRepository implements IIxcRepositoryDTO {
       email: customer.email,
       senha: password,
       tipo_localidade: "U",
+      ie_identidade: customer.ie_identidade,
     };
 
     const customer_document = customer.cnpj_cpf.replace(/[/.-]/g, "");

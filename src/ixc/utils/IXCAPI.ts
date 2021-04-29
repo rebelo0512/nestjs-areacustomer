@@ -132,6 +132,7 @@ interface IUpdateDTO {
     email: string;
     senha: string;
     tipo_localidade: string;
+    ie_identidade: string;
   };
   id: string | number;
 }
