@@ -275,4 +275,26 @@ export class IxcRepository implements IIxcRepositoryDTO {
 
     return true;
   }
+
+  public async reduceContract(id_contract: number): Promise<any> {
+    const form = "liberacao_reducao_contrato_29157";
+    const params = {
+      get_id: id_contract,
+    };
+
+    const result = await this.api.get({ form, params });
+
+    return result.data.message;
+  }
+
+  public async trustUnlock(id_contract: number): Promise<any> {
+    const form = "desbloqueio_confianca";
+    const params = {
+      id: id_contract,
+    };
+
+    const result = await this.api.get({ form, params });
+
+    return result.data.mensagem;
+  }
 }

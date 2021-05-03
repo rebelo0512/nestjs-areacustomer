@@ -26,7 +26,9 @@ import { CustomerGetBilletArchive } from "../services/customer/customerGetBillet
 import { CustomerGetFinancialInfo } from "../services/customer/customerGetFinancialInfo.service";
 import { CustomerGetPersonalInfo } from "../services/customer/customerGetPersonalInfo.service";
 import { CustomerPreRegistration } from "../services/customer/customerPreRegistration.service";
+import { CustomerReduceContract } from "../services/customer/customerReduceContract.service";
 import { CustomerSendBilletEmail } from "../services/customer/customerSendBilletEmail.service";
+import { CustomerTrustUnlock } from "../services/customer/customerTrustUnlock.service";
 
 @Controller("customers")
 export class CustomerController {
@@ -38,6 +40,8 @@ export class CustomerController {
     private CustomerSendBilletEmail: CustomerSendBilletEmail,
     private CustomerPreRegistration: CustomerPreRegistration,
     private CustomerGetBilletArchive: CustomerGetBilletArchive,
+    private CustomerReduceContract: CustomerReduceContract,
+    private CustomerTrustUnlock: CustomerTrustUnlock,
   ) {}
 
   @Post("login") // Path: /customers/login
@@ -110,13 +114,39 @@ export class CustomerController {
     };
   }
 
+  @Get(":code/:contract/reduce") // Path: /customers/:code/:contract/reduce
+  @UseGuards(CustomerTokenValidationGuard, CustomerCodeValidationGuard)
+  public async reduceContract(
+    @Req() req: Request,
+    @Param("contract") contract: number,
+  ) {
+    const result = await this.CustomerReduceContract.exec(contract);
+
+    return {
+      status: "success",
+      result,
+    };
+  }
+
+  @Get(":code/:contract/trust_unlock") // Path: /customers/:code/:contract/trust_unlock
+  @UseGuards(CustomerTokenValidationGuard, CustomerCodeValidationGuard)
+  public async trustUnlock(
+    @Req() req: Request,
+    @Param("contract") contract: number,
+  ) {
+    const result = await this.CustomerTrustUnlock.exec(contract);
+
+    return {
+      status: "success",
+      result,
+    };
+  }
+
   @Post("/pre_registration") // Path: /customers/pre_registration
   public async preRegistration(
     @Req() req: Request,
   ): Promise<ICustomerPreRegistrationReturnDTO> {
     const data: ICustomerPreRegistrationDTO = req.body;
-
-    console.log(req.body);
 
     return await this.CustomerPreRegistration.exec(data);
   }

@@ -20,6 +20,8 @@ import { MailModule } from "src/mail/mail.module";
 import { PasswordResetChangePassword } from "./services/password_reset/passwordResetChangePassword.service";
 import { CustomerPreRegistration } from "./services/customer/customerPreRegistration.service";
 import { CustomerGetBilletArchive } from "./services/customer/customerGetBilletArchive.service";
+import { CustomerReduceContract } from "./services/customer/customerReduceContract.service";
+import { CustomerTrustUnlock } from "./services/customer/customerTrustUnlock.service";
 
 @Module({
   imports: [
@@ -40,6 +42,8 @@ import { CustomerGetBilletArchive } from "./services/customer/customerGetBilletA
     CustomerSendBilletEmail,
     CustomerGetBilletArchive,
     CustomerPreRegistration,
+    CustomerReduceContract,
+    CustomerTrustUnlock,
     PasswordResetForgetPassword,
     PasswordResetChangePassword,
   ],

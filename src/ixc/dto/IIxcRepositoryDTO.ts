@@ -22,4 +22,6 @@ export interface IIxcRepositoryDTO {
   billetArchive(id_billet: number): Promise<string>;
   createLead(data: IIxcCreateLeadDTO): Promise<boolean>;
   changePasswordHotsite(data: IIxcChangePasswordHotsiteDTO): Promise<boolean>;
+  reduceContract(id_contract: number): Promise<boolean>;
+  trustUnlock(id_contract: number): Promise<any>;
 }

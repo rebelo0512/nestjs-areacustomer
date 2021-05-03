@@ -13,6 +13,21 @@ export class IXCAPI {
     return `Basic ${Buffer.from(this.token).toString("base64")}`;
   }
 
+  public async get({ form, params }: ISelectDTO): Promise<any> {
+    const path = `webservice/v1/${form}`;
+
+    const teste = await axios.get(`${this.url}/${path}`, {
+      data: JSON.stringify(params),
+      headers: {
+        Authorization: this.auth(),
+      },
+    });
+
+    console.log(teste);
+
+    return teste;
+  }
+
   public async select({ form, params }: ISelectDTO): Promise<any> {
     const path = `webservice/v1/${form}`;
 
@@ -68,6 +83,12 @@ interface IParamsSelectDTO {
   sortname: string;
   sortorder: string;
 }
+interface IParamsSelectReduceDTO {
+  get_id: number;
+}
+interface IParamsSelectTrustUnlockDTO {
+  id: number;
+}
 
 interface IParamsGetBilletDTO {
   boletos: string;
@@ -79,7 +100,11 @@ interface IParamsGetBilletDTO {
 
 interface ISelectDTO {
   form: string;
-  params: IParamsSelectDTO | IParamsGetBilletDTO;
+  params:
+    | IParamsSelectDTO
+    | IParamsGetBilletDTO
+    | IParamsSelectReduceDTO
+    | IParamsSelectTrustUnlockDTO;
 }
 
 interface ICreateDTO {
