@@ -27,6 +27,7 @@ export class CustomerGetPersonalInfo {
         contracts.push({
           id: contrato.id,
           plan: contrato.contrato,
+          status: contrato.status_internet,
         });
       }),
     );

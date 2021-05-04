@@ -1,12 +1,16 @@
-import axios from "axios";
+import { HttpCode, HttpException } from "@nestjs/common";
+import axios, { AxiosInstance } from "axios";
 
 export class IXCAPI {
   url: string;
   token: string;
+  api: AxiosInstance;
 
   constructor({ url = "", token = "" }: IIxcapiDTO) {
     this.url = url;
     this.token = token;
+
+    this.api = axios.create({ baseURL: `${this.url}/webservice/v1/` });
   }
 
   private auth() {
@@ -16,16 +20,23 @@ export class IXCAPI {
   public async get({ form, params }: ISelectDTO): Promise<any> {
     const path = `webservice/v1/${form}`;
 
-    const teste = await axios.get(`${this.url}/${path}`, {
-      data: JSON.stringify(params),
-      headers: {
-        Authorization: this.auth(),
-      },
-    });
+    try {
+      const teste = await axios(`${this.url}/${path}`, {
+        method: "POST",
+        data: JSON.stringify(params),
+        headers: {
+          ixcsoft: "listar",
+          "Content-Type": "application/json",
+          Authorization: this.auth(),
+        },
+      });
 
-    console.log(teste);
+      return teste;
+    } catch (err) {
+      console.log(err);
 
-    return teste;
+      throw new HttpException(err.response.data, 500);
+    }
   }
 
   public async select({ form, params }: ISelectDTO): Promise<any> {
