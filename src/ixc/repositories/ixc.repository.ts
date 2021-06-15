@@ -75,7 +75,7 @@ export class IxcRepository implements IIxcRepositoryDTO {
       query: code,
       oper: "=",
       page: "1",
-      rp: "1",
+      rp: "99999",
       sortname: `${form}.data_ativacao`,
       sortorder: "asc",
     };
