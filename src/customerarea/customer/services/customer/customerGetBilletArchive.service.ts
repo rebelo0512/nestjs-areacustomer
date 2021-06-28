@@ -9,12 +9,12 @@ import { format } from "date-fns";
 export class CustomerGetBilletArchive {
   fsA = fs.promises;
 
-  constructor(private IxcRepository: IxcRepository) {
+  constructor(private ixcRepository: IxcRepository) {
     this.fsA = this.fsA;
   }
 
   public async exec(id_billet: number): Promise<string> {
-    const billet_return = await this.IxcRepository.billetArchive(id_billet);
+    const billet_return = await this.ixcRepository.billetArchive(id_billet);
 
     const date = format(new Date(), "yyyy-MM-dd-hhmmss");
 

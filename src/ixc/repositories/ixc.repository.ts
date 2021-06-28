@@ -20,6 +20,17 @@ export class IxcRepository implements IIxcRepositoryDTO {
     this.api = this.api;
   }
 
+  async getTermByContract(contract_id: number): Promise<any> {
+    const form = "botao_rel_20939";
+    const params = {
+      id: contract_id,
+    };
+
+    const term = await this.api.pdf({ form, params });
+
+    return term;
+  }
+
   public async findCustomerById(
     code: number,
   ): Promise<IIxcFindCustomerByIdDTO> {
@@ -153,6 +164,24 @@ export class IxcRepository implements IIxcRepositoryDTO {
     return boletos;
   }
 
+  async findInvoicesByIdContract(contract_id: number): Promise<any> {
+    const form = "vd_saida";
+    const params = {
+      qtype: `${form}.id_contrato`,
+      query: contract_id,
+      oper: "=",
+      page: "1",
+      rp: "9999",
+      sortname: `${form}.data_emissao`,
+      sortorder: "desc",
+    };
+    let invoices = await this.api.select({ form, params });
+
+    invoices = invoices.data.registros;
+
+    return invoices;
+  }
+
   public async sendBilletMail(id_billet: number): Promise<boolean> {
     const form = "get_boleto";
     const params = {
@@ -182,6 +211,18 @@ export class IxcRepository implements IIxcRepositoryDTO {
     const billet = await this.api.select({ form, params });
 
     return billet;
+  }
+
+  async invoiceArchive(id_sale: number): Promise<any> {
+    const form = "imprimir_nota";
+    const params = {
+      id: id_sale,
+      base64: "S",
+    };
+
+    const invoice = await this.api.select({ form, params });
+
+    return invoice;
   }
 
   public async createLead({

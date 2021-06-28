@@ -24,7 +24,10 @@ import { CustomerAuth } from "../services/customer/customerAuth.service";
 import { CustomerChangePassword } from "../services/customer/customerChangePassword.service";
 import { CustomerGetBilletArchive } from "../services/customer/customerGetBilletArchive.service";
 import { CustomerGetFinancialInfo } from "../services/customer/customerGetFinancialInfo.service";
+import { CustomerGetInvoices } from "../services/customer/customerGetInvoices.service";
 import { CustomerGetPersonalInfo } from "../services/customer/customerGetPersonalInfo.service";
+import { CustomerGetTerm } from "../services/customer/customerGetTerm.service";
+import { CustomerInvoiceArchive } from "../services/customer/customerInvoiceArchive.service";
 import { CustomerPreRegistration } from "../services/customer/customerPreRegistration.service";
 import { CustomerReduceContract } from "../services/customer/customerReduceContract.service";
 import { CustomerSendBilletEmail } from "../services/customer/customerSendBilletEmail.service";
@@ -42,6 +45,9 @@ export class CustomerController {
     private CustomerGetBilletArchive: CustomerGetBilletArchive,
     private CustomerReduceContract: CustomerReduceContract,
     private CustomerTrustUnlock: CustomerTrustUnlock,
+    private customerGetInvoices: CustomerGetInvoices,
+    private customerInvoiceArchive: CustomerInvoiceArchive,
+    private customerGetTerm: CustomerGetTerm,
   ) {}
 
   @Post("login") // Path: /customers/login
@@ -90,6 +96,42 @@ export class CustomerController {
       code,
       contract,
     });
+  }
+
+  @Get(":code/:contract/term") // Path: /customers/:code/info/financial/:contract
+  @UseGuards(CustomerTokenValidationGuard, CustomerCodeValidationGuard)
+  public async getTermByContractId(
+    @Req() req: Request,
+    @Param("contract") contract: number,
+  ): Promise<any> {
+    const result = await this.customerGetTerm.exec(contract);
+
+    return {
+      status: "success",
+      link: `${req.protocol}://${process.env.HOST}:${process.env.PORT}/${process.env.PUBLIC_URL_FILES}/${result}`,
+    };
+  }
+
+  @Get(":code/info/financial/:contract/invoices") // Path: /customers/:code/info/financial/:contract
+  @UseGuards(CustomerTokenValidationGuard, CustomerCodeValidationGuard)
+  public async getInvoicesByIdContract(
+    @Param("contract") contract: number,
+  ): Promise<ICustomerFinancialInfoReturnDTO> {
+    return await this.customerGetInvoices.exec(contract);
+  }
+
+  @Get(":code/info/financial/invoice/:id_sale/archive") // Path: /customers/:code/info/financial/:contract
+  @UseGuards(CustomerTokenValidationGuard, CustomerCodeValidationGuard)
+  public async invoiceArchive(
+    @Req() req: Request,
+    @Param("id_sale") id_sale: number,
+  ): Promise<any> {
+    const result = await this.customerInvoiceArchive.exec(id_sale);
+
+    return {
+      status: "success",
+      link: `${req.protocol}://${process.env.HOST}:${process.env.PORT}/${process.env.PUBLIC_URL_FILES}/${result}`,
+    };
   }
 
   @Get(":code/info/billet/:code_billet") // Path: /customers/:code/info/billet/:code_billet

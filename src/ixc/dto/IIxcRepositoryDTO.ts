@@ -6,6 +6,7 @@ import { IIxcFindCustomerByHotsiteEmailDTO } from "./IIxcFindCustomerByHotsiteEm
 import { IIxcFindCustomerByIdDTO } from "./IIxcFindCustomerByIdDTO";
 
 export interface IIxcRepositoryDTO {
+  getTermByContract(contract_id: number): Promise<any>;
   findCustomerById(code: number): Promise<IIxcFindCustomerByIdDTO>;
   findCustomerByHotsiteEmail(
     email: string,
@@ -18,8 +19,10 @@ export interface IIxcRepositoryDTO {
   findBilletByContractId(
     id_contract: number,
   ): Promise<IIxcFindBilletByContractIdDTO[]>;
+  findInvoicesByIdContract(contract_id: number): Promise<any>;
   sendBilletMail(id_billet: number): Promise<boolean>;
   billetArchive(id_billet: number): Promise<string>;
+  invoiceArchive(id_sale: number): Promise<any>;
   createLead(data: IIxcCreateLeadDTO): Promise<boolean>;
   changePasswordHotsite(data: IIxcChangePasswordHotsiteDTO): Promise<boolean>;
   reduceContract(id_contract: number): Promise<boolean>;

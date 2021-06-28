@@ -22,6 +22,9 @@ import { CustomerPreRegistration } from "./services/customer/customerPreRegistra
 import { CustomerGetBilletArchive } from "./services/customer/customerGetBilletArchive.service";
 import { CustomerReduceContract } from "./services/customer/customerReduceContract.service";
 import { CustomerTrustUnlock } from "./services/customer/customerTrustUnlock.service";
+import { CustomerGetInvoices } from "./services/customer/customerGetInvoices.service";
+import { CustomerInvoiceArchive } from "./services/customer/customerInvoiceArchive.service";
+import { CustomerGetTerm } from "./services/customer/customerGetTerm.service";
 
 @Module({
   imports: [
@@ -46,6 +49,9 @@ import { CustomerTrustUnlock } from "./services/customer/customerTrustUnlock.ser
     CustomerTrustUnlock,
     PasswordResetForgetPassword,
     PasswordResetChangePassword,
+    CustomerGetInvoices,
+    CustomerInvoiceArchive,
+    CustomerGetTerm,
   ],
   exports: [CustomerRepository],
 })

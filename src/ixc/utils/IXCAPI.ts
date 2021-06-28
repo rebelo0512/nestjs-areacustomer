@@ -1,4 +1,4 @@
-import { HttpCode, HttpException } from "@nestjs/common";
+import { HttpException } from "@nestjs/common";
 import axios, { AxiosInstance } from "axios";
 
 export class IXCAPI {
@@ -27,6 +27,30 @@ export class IXCAPI {
         headers: {
           ixcsoft: "listar",
           "Content-Type": "application/json",
+          Authorization: this.auth(),
+        },
+      });
+
+      return teste;
+    } catch (err) {
+      console.log(err);
+
+      throw new HttpException(err.response.data, 500);
+    }
+  }
+
+  public async pdf({ form, params }: ISelectDTO): Promise<any> {
+    const path = `webservice/v1/${form}`;
+
+    try {
+      const teste = await axios({
+        url: `${this.url}/${path}`,
+        method: "POST",
+        data: JSON.stringify(params),
+        responseType: "arraybuffer",
+        headers: {
+          ixcsoft: "listar",
+          "Content-Type": "application/pdf",
           Authorization: this.auth(),
         },
       });
@@ -99,6 +123,7 @@ interface IParamsSelectReduceDTO {
 }
 interface IParamsSelectTrustUnlockDTO {
   id: number;
+  base64?: string;
 }
 
 interface IParamsGetBilletDTO {
